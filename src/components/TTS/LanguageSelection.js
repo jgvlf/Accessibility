@@ -45,11 +45,11 @@ export function LanguageSelection(){
                     </p>
                 </div>
             </Speaker>
-            <select name="language" id="language" defaultValue={"pt-PT"} onChange={getTagValue}>
+            <select name="language" id="language" onChange={getTagValue}>
                 <option value="pt-PT">Português (Brasil)</option>
                 <option value="es-ES">Espanhol (Espanha)</option>
                 <option value="en-US">Inglês (EUA)</option>
-                <option value="de-DE">Alemão (Alemanha)</option>
+                {/* <option value="de-DE">Alemão (Alemanha)</option> */}
             </select>
         </>
         )
