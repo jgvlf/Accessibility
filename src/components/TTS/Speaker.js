@@ -3,14 +3,14 @@ import SoundSpeak from "./assets/img/speaker.svg";
 import Artyom from "artyom.js";
 
 
-export function Speaker({children, value}){
+export function Speaker({children, speakerValue}){
     
     function initializerSpeaker(){
         const artyom = new Artyom();
-        console.log(value);
+        // console.log(speakerValue);
         setTimeout(()=>{
             artyom.initialize({
-                lang: value,
+                lang: speakerValue,
                 continuous: false,
                 soundex: true,
                 debug: true,

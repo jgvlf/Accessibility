@@ -1,54 +1,50 @@
 import React, { useState } from "react";
 import { Speaker } from "./Speaker";
+import { i18n } from "../Translate/i18n";
+import { useEffect } from "react";
 
 export function LanguageSelection(){
-    const [value, setValue] = useState("pt-PT");
+    const I18N_STORAGE_KEY = 'i18nextLng';
+    // const [setup, setSetup] = useState("")
 
-    function getTagValue(){
+    function onMouseOutHandler(){
+        document.addEventListener("mouseout", getValues);
+    }
+
+    const getValues = (event) =>{
+        localStorage.setItem(I18N_STORAGE_KEY, event.target.value);
+        getSpeakSelectionTagValue();
+        //refresh the page
+        window.location.reload();
+    }
+
+    function getSpeakSelectionTagValue(){
         var element = document.getElementById("language");
         var result = element.value;
-        setValue(result);
+        localStorage.setItem("speakValue", result);
+        console.log(result);
 }
 
     return(
         <>
-            <Speaker value={value}>
-                <h1>Ich Will</h1>
-                <h1>Bem Vindo ao Manual Virtual da Bosch.</h1>
-                <ul>
-                    <li>Informações Técnicas.</li>
-                    <li>Informações importantes antes do uso.</li>
-                    <li>Montagem.</li>
-                    <li>Modo de utilização.</li>
-                    <li>Modo de utilização.</li>
-                </ul>
+            <Speaker speakerValue={localStorage.getItem("speakValue")}>
+                <h1>{i18n.t('titulos.titulo')}</h1>
+      
+                <p>{i18n.t('textos.abacaxi')}</p>
+                
+                <img src="https://s2.glbimg.com/rl2qA0jqm8CYvBh7ZTnAu8NG6ds=/0x0:1999x3000/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_b58693ed41d04a39826739159bf600a0/internal_photos/bs/2021/N/1/8FdLsPS2G4uiUV4a8MOg/abacaxi.jpg" width="300px" alt="Abacaxi, fruta amarela e verde em fundo amarelo"/>
+                
+                <br/><button>{i18n.t('botoes.comprarAbacaxi')}</button>
+                
                 <div>
-                    <h2>
-                        Technical Informations.
-                    </h2>
-                    <p>
-                        The search for a motive is on after 7 killed in Northern California, the state’s third mass shooting in three days.
-                    </p>
-                    <p>
-                        A professional tools, BOSCH standard.
-                    </p>
-                </div>
-                <div>
-                    <h2>
-                        Asamblea.
-                    </h2>
-                    <p>
-                        Nuevo Servicio 012 de Información y Atención al Ciudadano El Servicio 012 de la Comunidad de Madrid incorpora nuevos canales de atención, y lanza una nueva plataforma que ofrece servicios de información personalizada.
-                    </p>
-                    <p>
-                        Usar responsablemente.
-                    </p>
+                    <h2>{i18n.t('titulos.tituloSobre')}</h2>
+                    <p>{i18n.t('textos.abacaxiSobre')}</p>
                 </div>
             </Speaker>
-            <select name="language" id="language" onChange={getTagValue}>
-                <option value="pt-PT">Português (Brasil)</option>
-                <option value="es-ES">Espanhol (Espanha)</option>
-                <option value="en-US">Inglês (EUA)</option>
+            <select name="language" id="language" onClick={onMouseOutHandler}>
+                <option value="pt-PT">{i18n.t('seletores.idioma1')}</option>
+                <option value="en-US">{i18n.t('seletores.idioma2')}</option>
+                <option value="es-ES">{i18n.t('seletores.idioma3')}</option>
                 {/* <option value="de-DE">Alemão (Alemanha)</option> */}
             </select>
         </>
