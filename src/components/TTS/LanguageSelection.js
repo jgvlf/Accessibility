@@ -5,13 +5,21 @@ import { useEffect } from "react";
 
 export function LanguageSelection(){
     const I18N_STORAGE_KEY = 'i18nextLng';
-    // const [setup, setSetup] = useState("")
 
-    function onMouseOutHandler(){
-        document.addEventListener("mouseout", getValues);
+    function onSelectTagHandler(){
+        console.log("Entrou no Componente");
+        const selectionField = document.getElementById("language");
+        selectionField.addEventListener("click", onMouseClickHandler);
+    }
+
+    function onMouseClickHandler(){
+        console.log("Clicou");
+        const selectionField = document.getElementById("language");
+        selectionField.addEventListener("click", getValues);
     }
 
     const getValues = (event) =>{
+        console.log("Evento Finalizado");
         localStorage.setItem(I18N_STORAGE_KEY, event.target.value);
         getSpeakSelectionTagValue();
         //refresh the page
@@ -41,7 +49,7 @@ export function LanguageSelection(){
                     <p>{i18n.t('textos.abacaxiSobre')}</p>
                 </div>
             </Speaker>
-            <select name="language" id="language" onClick={onMouseOutHandler}>
+            <select name="language" id="language" onMouseOver={onSelectTagHandler}>
                 <option value="pt-PT">{i18n.t('seletores.idioma1')}</option>
                 <option value="en-US">{i18n.t('seletores.idioma2')}</option>
                 <option value="es-ES">{i18n.t('seletores.idioma3')}</option>
