@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Speaker } from "./Speaker";
 import { i18n } from "../Translate/i18n";
-import { useEffect } from "react";
 
 export function LanguageSelection(){
     const I18N_STORAGE_KEY = 'i18nextLng';
@@ -13,9 +12,9 @@ export function LanguageSelection(){
     }
 
     function onMouseClickHandler(){
-        console.log("Clicou");
-        const selectionField = document.getElementById("language");
-        selectionField.addEventListener("click", getValues);
+    console.log("Clicou");
+    const selectionField = document.getElementById("language");
+    selectionField.addEventListener("change", getValues);
     }
 
     const getValues = (event) =>{
@@ -49,7 +48,8 @@ export function LanguageSelection(){
                     <p>{i18n.t('textos.abacaxiSobre')}</p>
                 </div>
             </Speaker>
-            <select name="language" id="language" onMouseOver={onSelectTagHandler}>
+            <select name="language" id="language" defaultValue={""}  onMouseEnter={onSelectTagHandler}>
+                <option value="" disabled>{i18n.t('seletores.escolhaIdioma')}</option>
                 <option value="pt-PT">{i18n.t('seletores.idioma1')}</option>
                 <option value="en-US">{i18n.t('seletores.idioma2')}</option>
                 <option value="es-ES">{i18n.t('seletores.idioma3')}</option>
